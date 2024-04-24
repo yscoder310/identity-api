@@ -1,7 +1,7 @@
 export interface Contact {
   id: number;
-  email: string;
   phone_number: string;
+  email: string;
   linked_id: number | null;
   link_precedence: "primary" | "secondary";
   created_at: Date;
