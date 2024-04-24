@@ -9,7 +9,7 @@ import { consolidate_contacts } from "../helpers";
 
 export const identify = async (req: Request, res: Response) => {
   try {
-    const { email, phone_number } = req.body;
+    const { email, phoneNumber: phone_number } = req.body;
 
     const existingEmailContact = email
       ? await fetch_contact_by_email(email)
@@ -23,8 +23,14 @@ export const identify = async (req: Request, res: Response) => {
     }
 
     if (!email || !phone_number) {
-      const existingContacts = existingPhoneContact.filter(contact => contact.link_precedence === 'secondary');
-      const response = consolidate_contacts(existingContacts, email, phone_number);
+      const existingContacts = existingPhoneContact.filter(
+        (contact) => contact.link_precedence === "secondary"
+      );
+      const response = consolidate_contacts(
+        existingContacts,
+        email,
+        phone_number
+      );
       return res.json({ contact: response });
     }
 
